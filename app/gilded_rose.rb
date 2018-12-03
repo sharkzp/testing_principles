@@ -3,50 +3,16 @@ class GildedRose
     @items = items
   end
 
-  def update_quality
+  def update_quality()
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
-          end
-        end
+      if item.name == 'Aged Brie'
+        item.update_aged_brie_quality
+      elsif item.name == 'Backstage passes to a TAFKAL80ETC concert'
+        item.update_backstage_passes
+      elsif item.name == "Sulfuras, Hand of Ragnaros"
+        item.update_sulfuras
       else
-        if item.quality < 50
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-          end
-        end
-      end
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
-        else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
+        item.update_quality
       end
     end
   end
@@ -59,6 +25,59 @@ class Item
     @name = name
     @sell_in = sell_in
     @quality = quality
+  end
+
+  def update_quality
+    if @quality > 0
+      @quality = @quality - 1
+    end
+    @sell_in = @sell_in - 1
+
+    if @sell_in < 0
+      if @quality > 0
+        @quality = @quality - 1
+      end
+    end
+  end
+
+  def update_sulfuras
+  end
+
+  def update_backstage_passes
+    if @quality < 50
+      @quality = @quality + 1
+
+      if @sell_in < 11
+        if @quality < 50
+          @quality = @quality + 1
+        end
+      end
+      if @sell_in < 6
+        if @quality < 50
+          @quality = @quality + 1
+        end
+      end
+    end
+
+    @sell_in = @sell_in - 1
+
+    if @sell_in < 0
+      @quality = 0
+    end
+  end
+
+  def update_aged_brie_quality
+    if @quality < 50
+      @quality = @quality + 1
+    end
+
+    @sell_in = @sell_in - 1
+
+    if @sell_in < 0
+      if @quality < 50
+        @quality = @quality + 1
+      end
+    end
   end
 
   def to_s()
