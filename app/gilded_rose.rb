@@ -1,20 +1,23 @@
 class GildedRose
   def initialize(items)
-    @items = items
+    @items = items.map do |item|
+      if item.name == 'Aged Brie'
+        AgedBrieItem.new(item.name, item.sell_in, item.quality)
+      elsif item.name == "Sulfuras, Hand of Ragnaros"
+        SulfurasItem.new(item.name, item.sell_in, item.quality)
+      elsif item.name == 'Backstage passes to a TAFKAL80ETC concert'
+        BackstageItem.new(item.name, item.sell_in, item.quality)
+      else
+        item
+      end
+    end
   end
 
   def update_quality()
     @items.each do |item|
-      if item.name == 'Aged Brie'
-        item.update_aged_brie_quality
-      elsif item.name == 'Backstage passes to a TAFKAL80ETC concert'
-        item.update_backstage_passes
-      elsif item.name == "Sulfuras, Hand of Ragnaros"
-        item.update_sulfuras
-      else
-        item.update_quality
-      end
+      item.update_quality
     end
+    @items
   end
 end
 
@@ -40,10 +43,13 @@ class Item
     end
   end
 
-  def update_sulfuras
+  def to_s()
+    "#{@name}, #{@sell_in}, #{@quality}"
   end
+end
 
-  def update_backstage_passes
+class BackstageItem < Item
+  def update_quality
     if @quality < 50
       @quality = @quality + 1
 
@@ -65,8 +71,10 @@ class Item
       @quality = 0
     end
   end
+end
 
-  def update_aged_brie_quality
+class AgedBrieItem < Item
+  def update_quality
     if @quality < 50
       @quality = @quality + 1
     end
@@ -79,8 +87,9 @@ class Item
       end
     end
   end
+end
 
-  def to_s()
-    "#{@name}, #{@sell_in}, #{@quality}"
+class SulfurasItem < Item
+  def update_quality
   end
 end

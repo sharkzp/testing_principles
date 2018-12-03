@@ -2,8 +2,8 @@ require 'spec_helper'
 
 RSpec.describe(GildedRose) do
   describe '#update_quality' do
-    let(:gilded_rose) { GildedRose.new([item]) }
-    let(:item)        { Item.new(name, sell_in, quality) }
+    let(:gilded_rose) { GildedRose.new([Item.new(name, sell_in, quality)]) }
+    let(:item)        { gilded_rose.update_quality.first }
     let(:name)        { 'Normal Item' }
     let(:sell_in)     { 10 }
     let(:quality)     { 10 }
@@ -12,8 +12,6 @@ RSpec.describe(GildedRose) do
       let(:sell_in) { -1 }
 
       it 'nullify quality but decrease sell_in' do
-        gilded_rose.update_quality
-
         aggregate_failures 'testing item properties' do
           expect(item.quality).to eq(8)
           expect(item.sell_in).to eq(-2)
@@ -24,8 +22,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { -1 }
 
         it 'nullify quality but decrease sell_in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(-1)
             expect(item.sell_in).to eq(-2)
@@ -37,8 +33,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { 51 }
 
         it 'nullify quality but decrease sell_in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(49)
             expect(item.sell_in).to eq(-2)
@@ -51,8 +45,6 @@ RSpec.describe(GildedRose) do
       let(:sell_in) { 5 }
 
       it 'adds three points to quality but lowers sell in' do
-        gilded_rose.update_quality
-
         aggregate_failures 'testing item properties' do
           expect(item.quality).to eq(9)
           expect(item.sell_in).to eq(4)
@@ -63,8 +55,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { -1 }
 
         it 'adds three points to quality but lowers sell in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(-1)
             expect(item.sell_in).to eq(4)
@@ -76,8 +66,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { 51 }
 
         it 'does not changes quality but lowers sell in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(50)
             expect(item.sell_in).to eq(4)
@@ -90,8 +78,6 @@ RSpec.describe(GildedRose) do
       let(:sell_in) { 10 }
 
       it 'adds two points to quality but lowers sell_in' do
-        gilded_rose.update_quality
-
         aggregate_failures 'testing item properties' do
           expect(item.quality).to eq(9)
           expect(item.sell_in).to eq(9)
@@ -102,8 +88,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { -1 }
 
         it 'adds two points to quality but lowers sell_in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(-1)
             expect(item.sell_in).to eq(9)
@@ -115,8 +99,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { 51 }
 
         it 'does not changes quality but lowers sell in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(50)
             expect(item.sell_in).to eq(9)
@@ -129,8 +111,6 @@ RSpec.describe(GildedRose) do
       let(:sell_in) { 20 }
 
       it 'adds one point to quality but lowers sell_in' do
-        gilded_rose.update_quality
-
         aggregate_failures 'testing item properties' do
           expect(item.quality).to eq(9)
           expect(item.sell_in).to eq(19)
@@ -141,8 +121,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { -1 }
 
         it 'adds one point to quality but lowers sell_in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(-1)
             expect(item.sell_in).to eq(19)
@@ -154,8 +132,6 @@ RSpec.describe(GildedRose) do
         let(:quality) { 51 }
 
         it 'does not change quality but lowers sell_in' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(50)
             expect(item.sell_in).to eq(19)
@@ -171,8 +147,6 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { -1 }
 
         it 'never changes quality' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(10)
             expect(item.sell_in).to eq(-1)
@@ -183,8 +157,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'never changes quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(-1)
               expect(item.sell_in).to eq(-1)
@@ -196,8 +168,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'never changes quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
               expect(item.sell_in).to eq(-1)
@@ -210,8 +180,6 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 5 }
 
         it 'never changes' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(10)
             expect(item.sell_in).to eq(5)
@@ -222,8 +190,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'never changes quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(-1)
               expect(item.sell_in).to eq(5)
@@ -235,8 +201,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'never changes quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
               expect(item.sell_in).to eq(5)
@@ -249,8 +213,6 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 10 }
 
         it 'never changes' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(10)
             expect(item.sell_in).to eq(10)
@@ -261,8 +223,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'never changes quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(-1)
               expect(item.sell_in).to eq(10)
@@ -274,8 +234,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'never changes quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
               expect(item.sell_in).to eq(10)
@@ -288,8 +246,6 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 20 }
 
         it 'never changes' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(10)
             expect(item.sell_in).to eq(20)
@@ -300,8 +256,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'never changes' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(-1)
               expect(item.sell_in).to eq(20)
@@ -313,8 +267,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'never changes' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
               expect(item.sell_in).to eq(20)
@@ -331,8 +283,6 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { -1 }
 
         it 'lowers sell_in but ups quality' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(12)
             expect(item.sell_in).to eq(-2)
@@ -343,8 +293,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(1)
               expect(item.sell_in).to eq(-2)
@@ -356,8 +304,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
               expect(item.sell_in).to eq(-2)
@@ -370,8 +316,6 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 5 }
 
         it 'lowers sell_in but ups quality' do
-          gilded_rose.update_quality
-
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(11)
             expect(item.sell_in).to eq(4)
@@ -382,8 +326,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(0)
               expect(item.sell_in).to eq(4)
@@ -395,8 +337,6 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
-
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
               expect(item.sell_in).to eq(4)
@@ -409,7 +349,7 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 10 }
 
         it 'lowers sell_in but ups quality' do
-          gilded_rose.update_quality
+
 
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(11)
@@ -421,7 +361,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(0)
@@ -434,7 +374,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
@@ -448,7 +388,7 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 20 }
 
         it 'never changes' do
-          gilded_rose.update_quality
+
 
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(11)
@@ -460,7 +400,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(0)
@@ -473,7 +413,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'lowers sell_in but ups quality' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
@@ -491,7 +431,7 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { -1 }
 
         it 'nullify quality but decrease sell_in' do
-          gilded_rose.update_quality
+
 
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(0)
@@ -503,7 +443,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'nullify quality but decrease sell_in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(0)
@@ -516,7 +456,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'nullify quality but decrease sell_in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(0)
@@ -530,7 +470,7 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 5 }
 
         it 'adds three points to quality but lowers sell in' do
-          gilded_rose.update_quality
+
 
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(13)
@@ -542,7 +482,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'adds three points to quality but lowers sell in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(2)
@@ -555,7 +495,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'does not changes quality but lowers sell in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
@@ -569,7 +509,7 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 10 }
 
         it 'adds two points to quality but lowers sell_in' do
-          gilded_rose.update_quality
+
 
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(12)
@@ -581,7 +521,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'adds two points to quality but lowers sell_in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(1)
@@ -594,7 +534,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'does not changes quality but lowers sell in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
@@ -608,7 +548,7 @@ RSpec.describe(GildedRose) do
         let(:sell_in) { 20 }
 
         it 'adds one point to quality but lowers sell_in' do
-          gilded_rose.update_quality
+
 
           aggregate_failures 'testing item properties' do
             expect(item.quality).to eq(11)
@@ -620,7 +560,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { -1 }
 
           it 'adds one point to quality but lowers sell_in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(0)
@@ -633,7 +573,7 @@ RSpec.describe(GildedRose) do
           let(:quality) { 51 }
 
           it 'does not change quality but lowers sell_in' do
-            gilded_rose.update_quality
+
 
             aggregate_failures 'testing item properties' do
               expect(item.quality).to eq(51)
