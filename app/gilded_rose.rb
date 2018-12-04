@@ -1,7 +1,11 @@
 class GildedRose
   def initialize(items)
-    @items = items.map do |item|
-      if item.name == 'Aged Brie'
+    @items = items
+  end
+
+  def update_quality()
+    @items.map do |item|
+      item = if item.name == 'Aged Brie'
         AgedBrieItem.new(item.name, item.sell_in, item.quality)
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         SulfurasItem.new(item.name, item.sell_in, item.quality)
@@ -10,14 +14,10 @@ class GildedRose
       else
         item
       end
-    end
-  end
 
-  def update_quality()
-    @items.each do |item|
       item.update_quality
+      item
     end
-    @items
   end
 end
 
